@@ -2,7 +2,6 @@ import express from "express";
 import cors from "cors";
 import helmet from "helmet";
 import morgan from "morgan";
-import redis from "../shared/redis/redis.js";
 import dotenv from "dotenv";
 import proxy from "express-http-proxy";
 import { proxyWithUser } from "./utils/proxyWithHeaders.js";

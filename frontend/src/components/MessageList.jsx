@@ -1,10 +1,10 @@
 import MessageBubble from "./MessageBubble";
-
 import { useDispatch, useSelector } from "react-redux";
 import { getMessages } from "../features/message.api";
 import { setArtifacts, setMessages } from "../redux/message.slice";
 import { motion, AnimatePresence } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
+
 function NeuralPulse() {
   return (
     <div className="relative w-9 h-9 flex items-center justify-center shrink-0">
@@ -82,48 +82,25 @@ function GeneratingIndicator() {
 }
 
 export default function MessageList() {
-
   const bottomRef = useRef(null);
   const { messages, isLoading } = useSelector(state => state.message);
   const { selectedConversation } = useSelector(state => state.conversation);
   const dispatch = useDispatch();
+
   useEffect(() => {
-
     requestAnimationFrame(() => {
-
-      bottomRef.current?.scrollIntoView({
-
-        behavior: "smooth",
-
-        block: "end"
-
-      });
-
+      bottomRef.current?.scrollIntoView({ behavior: "smooth", block: "end" });
     });
-
   }, [messages.length, isLoading]);
+
   useEffect(() => {
     if (selectedConversation?.title === "New Chat") return;
     const get = async () => {
       const data = await getMessages(selectedConversation?._id);
       dispatch(setMessages(data));
-      const latestArtifactMessage =
-        [...data]
-          .reverse()
-          .find(
-            msg =>
-              msg.artifacts &&
-              msg.artifacts.length > 0
-          );
-
+      const latestArtifactMessage = [...data].reverse().find(msg => msg.artifacts && msg.artifacts.length > 0);
       if (latestArtifactMessage) {
-
-        dispatch(
-          setArtifacts(
-            latestArtifactMessage.artifacts
-          )
-        );
-
+        dispatch(setArtifacts(latestArtifactMessage.artifacts));
       }
     };
     get();
@@ -134,7 +111,7 @@ export default function MessageList() {
       {messages.length === 0 && !isLoading ? (
         <div className="h-full flex flex-col items-center justify-center gap-4 text-center">
           <div className="flex flex-col gap-1.5">
-            <h1 className="text-[20px] font-semibold text-slate-200 tracking-tight">VertexAI</h1>
+            <h1 className="text-[20px] font-semibold text-slate-200 tracking-tight">vertexAI</h1>
             <h3 className="text-[15px] font-semibold text-slate-400 tracking-tight">How can I help you?</h3>
             <p className="text-[13px] text-slate-600 max-w-[260px] leading-relaxed">Ask me anything — code, ideas, explanations, or just a quick question.</p>
           </div>
@@ -171,7 +148,6 @@ export default function MessageList() {
               <GeneratingIndicator />
             </motion.div>
           )}
-
         </>
       )}
       <div ref={bottomRef} />

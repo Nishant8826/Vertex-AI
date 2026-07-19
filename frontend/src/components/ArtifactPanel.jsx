@@ -7,21 +7,21 @@ import { Code2, Eye, PanelRightClose, PanelRightOpen, X, Copy, Check } from "luc
 import { motion, AnimatePresence } from "framer-motion";
 
 export default function ArtifactPanel() {
-  const [tab, setTab]               = useState("code");
+  const [tab, setTab] = useState("code");
   const [activeFile, setActiveFile] = useState(0);
-  const [collapsed, setCollapsed]   = useState(false);
+  const [collapsed, setCollapsed] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [copied, setCopied]         = useState(false);
+  const [copied, setCopied] = useState(false);
 
   const { artifacts } = useSelector(state => state.message);
   const artifact = artifacts?.[0];
 
   if (!artifact) return null;
 
-  const file       = artifact?.files?.[activeFile];
-  const htmlFile   = artifact?.files?.find(f => f.name === "index.html");
-  const cssFile    = artifact?.files?.find(f => f.name === "style.css");
-  const jsFile     = artifact?.files?.find(f => f.name === "script.js");
+  const file = artifact?.files?.[activeFile];
+  const htmlFile = artifact?.files?.find(f => f.name === "index.html");
+  const cssFile = artifact?.files?.find(f => f.name === "style.css");
+  const jsFile = artifact?.files?.find(f => f.name === "script.js");
   const canPreview = Boolean(htmlFile);
 
   const previewDoc = `<!DOCTYPE html>
@@ -43,12 +43,9 @@ ${htmlFile?.content || ""}
     setTimeout(() => setCopied(false), 2000);
   };
 
-
-
   /* ── Shared code panel content ── */
   const PanelContent = ({ onClose }) => (
     <div className="flex flex-col h-full bg-[#0d0f14]">
-
       {/* Header */}
       <div className="h-14 px-4 border-b border-white/[0.06] flex items-center gap-3 shrink-0">
         <button
@@ -66,7 +63,6 @@ ${htmlFile?.content || ""}
         </div>
 
         <div className="flex items-center gap-1 shrink-0">
-          {/* Copy button — only in code tab */}
           {tab === "code" && (
             <button
               onClick={handleCopy}

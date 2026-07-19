@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
-import { Plus, MessageSquare, Settings, LogOut, User, PenSquare, Menu, X, Coins, ConeIcon, CoinsIcon } from "lucide-react";
+import { Plus, MessageSquare, LogOut, User, PenSquare, Menu, X, CoinsIcon } from "lucide-react";
 import { useDispatch, useSelector } from "react-redux";
 import api from "../utils/axios";
 import { setUserData } from "../redux/user.slice";
-import { createConversation, getConversations } from "../features/conversation.api";
-import { addConversation, setConversations, setSelectedConversation } from "../redux/conversation.slice";
+import { getConversations } from "../features/conversation.api";
+import { setConversations, setSelectedConversation } from "../redux/conversation.slice";
 import { getMessages } from "../features/message.api";
 import { setArtifacts, setMessages } from "../redux/message.slice";
 import BillingDrawer from "./BillingDrawer";
@@ -13,11 +13,12 @@ export default function Sidebar() {
   const [hovered, setHovered] = useState(null);
   const [collapsed, setCollapsed] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [imageError, setImageError] = useState(false)
+  const [imageError, setImageError] = useState(false);
   const { userData } = useSelector(state => state.user);
   const { conversations, selectedConversation } = useSelector(state => state.conversation);
   const dispatch = useDispatch();
   const [showBilling, setShowBilling] = useState(false);
+
   const logout = async () => {
     try {
       await api.get("/api/auth/logout");
@@ -111,10 +112,8 @@ export default function Sidebar() {
   /* ── Full sidebar content ── */
   const SidebarContent = () => (
     <div className="flex flex-col h-full">
-
       {/* Header */}
       <div className="flex items-center gap-2.5 px-4 py-4 border-b border-white/[0.06]">
-        {/* Desktop collapse */}
         <button
           onClick={() => setCollapsed(true)}
           className="hidden lg:flex items-center justify-center w-7 h-7 rounded-lg text-slate-500 hover:text-slate-200 hover:bg-white/[0.05] transition-colors duration-150 bg-transparent border-none cursor-pointer"
@@ -122,7 +121,6 @@ export default function Sidebar() {
           <PanelIcon />
         </button>
 
-        {/* Mobile close */}
         <button
           onClick={() => setMobileOpen(false)}
           className="lg:hidden flex items-center justify-center w-7 h-7 rounded-lg text-slate-500 hover:text-slate-200 hover:bg-white/[0.05] transition-colors duration-150 bg-transparent border-none cursor-pointer"
@@ -155,24 +153,15 @@ export default function Sidebar() {
         </button>
       </div>
 
-      {
-        conversations.length == 0 ? (
-
-          <div className="px-5 pt-4 pb-1.5 text-[10.5px] font-semibold uppercase tracking-widest text-slate-600">
-            No recent conversations
-          </div>
-        )
-          :
-          (
-
-            <p className="px-5 pt-4 pb-1.5 text-[10.5px] font-semibold uppercase tracking-widest text-slate-600">
-              Recents
-            </p>
-
-          )
-      }
-
-      {/* Section label */}
+      {conversations.length === 0 ? (
+        <div className="px-5 pt-4 pb-1.5 text-[10.5px] font-semibold uppercase tracking-widest text-slate-600">
+          No recent conversations
+        </div>
+      ) : (
+        <p className="px-5 pt-4 pb-1.5 text-[10.5px] font-semibold uppercase tracking-widest text-slate-600">
+          Recents
+        </p>
+      )}
 
       {/* Chat list */}
       <div className="flex-1 overflow-y-auto px-2.5 pb-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
@@ -210,20 +199,18 @@ export default function Sidebar() {
         {userData ? (
           <div className="flex items-center gap-2.5 cursor-pointer rounded-xl px-3 py-2.5 hover:bg-white/[0.05] transition-colors duration-150">
             <div className="relative shrink-0">
-              {
-                !userData?.avatar || imageError ? (
-                  <div className="w-9 h-9 rounded-[10px] bg-white/[0.06] flex items-center justify-center">
-                    <User size={15} className="text-slate-400" />
-                  </div>
-                ) : (
-                  <img
-                    src={userData.avatar}
-                    alt={userData.name}
-                    className="w-9 h-9 rounded-[10px] object-cover border-2 border-indigo-500/25"
-                    onError={() => setImageError(true)}
-                  />
-                )
-              }
+              {!userData?.avatar || imageError ? (
+                <div className="w-9 h-9 rounded-[10px] bg-white/[0.06] flex items-center justify-center">
+                  <User size={15} className="text-slate-400" />
+                </div>
+              ) : (
+                <img
+                  src={userData.avatar}
+                  alt={userData.name}
+                  className="w-9 h-9 rounded-[10px] object-cover border-2 border-indigo-500/25"
+                  onError={() => setImageError(true)}
+                />
+              )}
               <span className="absolute -bottom-px -right-px w-[9px] h-[9px] bg-green-500 rounded-full border-2 border-[#0d0f14] block" />
             </div>
             <div className="flex-1 min-w-0">
@@ -250,7 +237,6 @@ export default function Sidebar() {
           </div>
         )}
       </div>
-
     </div>
   );
 
@@ -285,15 +271,7 @@ export default function Sidebar() {
         <SidebarContent />
       </div>
 
-      <BillingDrawer
-
-        open={showBilling}
-
-        onClose={() =>
-          setShowBilling(false)
-        }
-
-      />
+      <BillingDrawer open={showBilling} onClose={() => setShowBilling(false)} />
     </>
   );
 }

@@ -6,9 +6,6 @@ import axios from "axios";
 export const chat = async (req, res, next) => {
   try {
     const { prompt, conversationId, agent } = req.body;
-    console.log(req.body);
-    console.log(req.file);
-
     await addMessage(conversationId, "user", prompt);
     await axios.post(`${process.env.CHAT_SERVICE}/save-message`, {
       conversationId,
@@ -23,8 +20,7 @@ export const chat = async (req, res, next) => {
       agent,
       file: req.file
     });
-
-    console.log("after res", result);
+    
     await addMessage(conversationId, "assistant", result.response);
     await axios.post(`${process.env.CHAT_SERVICE}/save-message`, {
       conversationId,
