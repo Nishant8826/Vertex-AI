@@ -1,0 +1,66 @@
+# Dependency directories
+node_modules/
+**/node_modules/
+
+# Production/Build outputs
+dist/
+**/dist/
+dist-ssr/
+**/dist-ssr/
+build/
+**/build/
+
+# Local env files
+.env
+.env.*
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+**/.env
+**/.env.*
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Diagnostic reports (Common in Node.js)
+report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
+
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# Temporary/Upload files
+temp/
+**/temp/
+uploads/
+**/uploads/
+*.pdf
+*.pptx
+*.png
+*.jpg
+*.jpeg
+
+# Editor directories and files
+.vscode/
+!.vscode/extensions.json
+.idea/
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+
+# Firebase Service Account
+serviceAccount.json
+**/serviceAccount.json
