@@ -80,14 +80,28 @@ Every service and the frontend requires environment configurations. Copy the tem
 
 Also add your Firebase Admin credentials in `backend/services/auth/serviceAccount.json`.
 
-### Step 2: Install Dependencies
+### Step 2: Start Redis via Docker
+Before starting any backend service, you must have a Redis instance running on port `6379`.
+
+**Option A: Using Docker Compose (Recommended)**
+```bash
+cd backend
+docker compose up -d
+```
+
+**Option B: Using a Standalone Container**
+```bash
+docker run -d --name vertex-redis -p 6379:6379 redis
+```
+
+### Step 3: Install Dependencies
 Install packages for the backend gateway, services, and frontend:
 ```bash
 # In the root, backend, frontend, gateway, and each microservice directory:
 npm install
 ```
 
-### Step 3: Run the Services
+### Step 4: Run the Services
 Run each backend component and the React client dev server:
 
 ```bash

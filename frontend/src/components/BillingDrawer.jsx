@@ -27,7 +27,7 @@ export default function BillingDrawer({
 
         currency: data.order.currency,
 
-        name: "vertexAI",
+        name: "VertexAI",
 
         description: `${data.plan.name} Plan`,
 

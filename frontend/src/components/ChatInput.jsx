@@ -32,9 +32,9 @@ export default function ChatInput({
 
   const placeholders = {
 
-    auto: "Ask vertexAI...",
+    auto: "Ask VertexAI...",
 
-    chat: "Chat with vertexAI...",
+    chat: "Chat with VertexAI...",
 
     coding: "Describe the software you want...",
 
