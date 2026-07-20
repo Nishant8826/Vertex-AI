@@ -20,19 +20,10 @@ export const conversationSlice = createSlice({
       state.selectedConversation = action.payload;
     },
     setConvTitle: (state, action) => {
-      const {
-        conversationId,
-        title
-      } = action.payload;
-      state.conversations =
-        state.conversations.map((conv) =>
-          conv._id === conversationId
-            ? {
-              ...conv,
-              title
-            }
-            : conv
-        );
+      const { conversationId, title } = action.payload;
+      state.conversations = state.conversations.map((conv) =>
+        conv._id === conversationId ? { ...conv, title } : conv
+      );
 
       if (state.selectedConversation?._id === conversationId) {
         state.selectedConversation = { ...state.selectedConversation, title };

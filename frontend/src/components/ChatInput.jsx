@@ -105,12 +105,11 @@ export default function ChatInput({ setBanner }) {
       setSelectedFile(null);
       const data = await sendPrompt(formData);
       console.log(data);
-      dispatch(
-        addMessage({
-          role: "assistant",
-          content: data.answer,
-          images: data.images
-        })
+      dispatch(addMessage({
+        role: "assistant",
+        content: data.answer,
+        images: data.images
+      })
       );
       if (data.artifacts) {
         dispatch(setArtifacts(data.artifacts));
@@ -137,11 +136,10 @@ export default function ChatInput({ setBanner }) {
               <button
                 key={agent.id}
                 onClick={() => setSelectedAgent(agent.id)}
-                className={`flex-shrink-0 inline-flex items-center gap-1.5 px-3 py-2 rounded-full text-xs font-medium border transition-all ${
-                  isActive
+                className={`flex-shrink-0 inline-flex items-center gap-1.5 px-3 py-2 rounded-full text-xs font-medium border transition-all ${isActive
                     ? "bg-gradient-to-r from-indigo-500 to-violet-600 text-white border-transparent shadow-[0_1px_8px_rgba(99,102,241,.35)]"
                     : "bg-white/[0.03] text-slate-400 border-white/[0.06] hover:bg-white/[0.07]"
-                }`}
+                  }`}
               >
                 <Icon size={14} className={isActive ? "text-white" : "text-slate-500"} />
                 {agent.label}
@@ -185,7 +183,7 @@ export default function ChatInput({ setBanner }) {
           value={value}
           onChange={e => setValue(e.target.value)}
           placeholder={placeholders[selectedAgent]}
-          rows={3}
+          rows={2}
           disabled={isLoading}
           className="w-full bg-transparent outline-none resize-none text-[14px] text-slate-200 placeholder:text-slate-600 leading-relaxed [scrollbar-width:none] [&::-webkit-scrollbar]:hidden disabled:opacity-50"
         />
@@ -214,9 +212,8 @@ export default function ChatInput({ setBanner }) {
             </button>
             <button
               onClick={toggleMic}
-              className={`flex items-center justify-center w-8 h-8 rounded-lg transition-all cursor-pointer ${
-                isListening ? "bg-red-500 text-white" : "text-slate-600 hover:bg-white/[0.05]"
-              }`}
+              className={`flex items-center justify-center w-8 h-8 rounded-lg transition-all cursor-pointer ${isListening ? "bg-red-500 text-white" : "text-slate-600 hover:bg-white/[0.05]"
+                }`}
             >
               {isListening ? <MicOff size={14} /> : <Mic size={14} />}
             </button>
