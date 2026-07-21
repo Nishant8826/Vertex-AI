@@ -237,7 +237,7 @@ export default function ChatInput({ setBanner }) {
       </div>
 
       <p className="text-center text-[10.5px] text-slate-700 mt-2.5">
-        vertexAI can make mistakes. Verify important info.
+        VertexAI can make mistakes. Verify important info.
       </p>
     </div>
   );
