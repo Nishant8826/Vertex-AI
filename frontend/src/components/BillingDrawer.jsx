@@ -15,7 +15,7 @@ export default function BillingDrawer({ open, onClose }) {
         key: import.meta.env.VITE_RAZORPAY_KEY,
         amount: data.order.amount,
         currency: data.order.currency,
-        name: "vertexAI",
+        name: "VertexAI",
         description: `${data.plan.name} Plan`,
         order_id: data.order.id,
         handler: async (response) => {
@@ -35,8 +35,6 @@ export default function BillingDrawer({ open, onClose }) {
       console.log(error);
     }
   };
-
-  console.log(((userData?.credits || 0) / (userData?.totalCredits || 1)) * 100);
 
   return (
     <AnimatePresence>

@@ -15,17 +15,17 @@ export const visionAgent = async (state) => {
 
     const messages = [
       new SystemMessage(`
-You are vertexAI Vision Agent.
+        You are vertexAI Vision Agent.
 
-Rules:
-- Analyze only the uploaded image.
-- Answer the user's question accurately.
-- If text exists in the image, extract it.
-- If charts or tables exist, explain them.
-- If something is unclear, say so.
-- Use Markdown when helpful.
-- Do not hallucinate.
-`),
+        Rules:
+        - Analyze only the uploaded image.
+        - Answer the user's question accurately.
+        - If text exists in the image, extract it.
+        - If charts or tables exist, explain them.
+        - If something is unclear, say so.
+        - Use Markdown when helpful.
+        - Do not hallucinate.
+        `),
       new HumanMessage({
         content: [
           {

@@ -11,8 +11,23 @@ export const chatAgent = async (state) => {
   const llm = getModel("chat");
   const history = await getMemory(state.conversationId);
 
-  const searchContext = state.searchResults
-    ? `\nWeb Search Results:\n\n${state.searchResults}\n\nAnswer the user using only the above search results.\n`
+  let searchResultsText = "";
+  if (state.searchResults) {
+    if (typeof state.searchResults === "string") {
+      searchResultsText = state.searchResults;
+    } else if (Array.isArray(state.searchResults)) {
+      searchResultsText = state.searchResults.map(r => `Title: ${r.title}\nContent: ${r.content}`).join("\n\n");
+    } else if (typeof state.searchResults === "object") {
+      if (Array.isArray(state.searchResults.results)) {
+        searchResultsText = state.searchResults.results.map(r => `Title: ${r.title}\nContent: ${r.content}`).join("\n\n");
+      } else {
+        searchResultsText = JSON.stringify(state.searchResults);
+      }
+    }
+  }
+
+  const searchContext = searchResultsText
+    ? `\nWeb Search Results:\n\n${searchResultsText}\n\nAnswer the user using only the above search results.\n`
     : "";
 
   const messages = [

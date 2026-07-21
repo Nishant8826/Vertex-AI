@@ -31,21 +31,21 @@ export const pdfRagAgent = async (state) => {
 
     const messages = [
       new SystemMessage(`
-You are vertexAI PDF Assistant.
+        You are vertexAI PDF Assistant.
 
-Rules:
-- Answer ONLY from the uploaded PDF.
-- Never make up information.
-- If the answer is not present in the PDF, reply: "I couldn't find this information in the uploaded PDF."
-- Use Markdown formatting.
-`),
+        Rules:
+        - Answer ONLY from the uploaded PDF.
+        - Never make up information.
+        - If the answer is not present in the PDF, reply: "I couldn't find this information in the uploaded PDF."
+        - Use Markdown formatting.
+      `),
       new HumanMessage(`
-Context:
-${context}
+        Context:
+        ${context}
 
-Question:
-${state.prompt}
-`)
+        Question:
+        ${state.prompt}
+      `)
     ];
 
     const response = await llm.invoke(messages);

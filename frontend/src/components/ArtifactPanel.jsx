@@ -24,16 +24,17 @@ export default function ArtifactPanel() {
   const jsFile = artifact?.files?.find(f => f.name === "script.js");
   const canPreview = Boolean(htmlFile);
 
-  const previewDoc = `<!DOCTYPE html>
-<html>
+  const previewDoc = `
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-<style>${cssFile?.content || ""}</style>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <style>${cssFile?.content || ""}</style>
 </head>
 <body>
-${htmlFile?.content || ""}
-<script>${jsFile?.content || ""}<\/script>
+  ${htmlFile?.content || ""}
+  <script>${jsFile?.content || ""}<\/script>
 </body>
 </html>`;
 

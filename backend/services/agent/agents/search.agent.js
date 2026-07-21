@@ -8,16 +8,9 @@ export const searchAgent = async (state) => {
 
   try {
     const results = await searchTool.invoke({ query: state.prompt });
-    console.log(results);
-    return {
-      ...state,
-      searchResults: results
-    };
+    return { ...state, searchResults: results };
   } catch (error) {
     console.log(error);
-    return {
-      ...state,
-      searchResults: []
-    };
+    return { ...state, searchResults: [] };
   }
 };

@@ -12,21 +12,21 @@ export const pdfAgent = async (state) => {
 
     const llm = getModel("pdf");
     const aiResponse = await llm.invoke(`
-Create a professional document about:
-${state.prompt}
+      Create a professional document about:
+      ${state.prompt}
 
-Rules:
-- Generate a professional title.
-- Generate introduction.
-- Generate multiple sections.
-- Generate bullet points where required.
-- Generate conclusion.
-- No markdown.
-- No code blocks.
-- No ** symbols.
-- No ### headings.
-- Return plain text only.
-`);
+      Rules:
+      - Generate a professional title.
+      - Generate introduction.
+      - Generate multiple sections.
+      - Generate bullet points where required.
+      - Generate conclusion.
+      - No markdown.
+      - No code blocks.
+      - No ** symbols.
+      - No ### headings.
+      - Return plain text only.
+      `);
 
     const rawContent = aiResponse?.content?.trim() || state.prompt;
     const lines = rawContent.split("\n").map(l => l.trim()).filter(Boolean);

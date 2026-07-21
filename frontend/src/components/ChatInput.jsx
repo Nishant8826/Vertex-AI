@@ -183,9 +183,9 @@ export default function ChatInput({ setBanner }) {
           value={value}
           onChange={e => setValue(e.target.value)}
           placeholder={placeholders[selectedAgent]}
-          rows={2}
+          rows={1}
           disabled={isLoading}
-          className="w-full bg-transparent outline-none resize-none text-[14px] text-slate-200 placeholder:text-slate-600 leading-relaxed [scrollbar-width:none] [&::-webkit-scrollbar]:hidden disabled:opacity-50"
+          className="w-full bg-transparent outline-none resize-none text-[14px] text-slate-200 placeholder:text-slate-600 leading-relaxed [scrollbar-width:none] [&::-webkit-scrollbar]:hidden disabled:opacity-50 mt-5"
         />
 
         {/* Bottom row */}
